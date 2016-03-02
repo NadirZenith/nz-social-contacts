@@ -1,0 +1,167 @@
+<?php
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * @link       http://example.com
+ * @since      1.0.0
+ *
+ * @package    Nz_Social_Contacts
+ * @subpackage Nz_Social_Contacts/admin
+ */
+
+/**
+ * The admin-specific functionality of the plugin.
+ *
+ * Defines the plugin name, version, and two examples hooks for how to
+ * enqueue the admin-specific stylesheet and JavaScript.
+ *
+ * @package    Nz_Social_Contacts
+ * @subpackage Nz_Social_Contacts/admin
+ * @author     Your Name <email@example.com>
+ */
+class Nz_Social_Contacts_Admin
+{
+
+    /**
+     * The ID of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $plugin_name    The ID of this plugin.
+     */
+    private $plugin_name;
+
+    /**
+     * The version of this plugin.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $version    The current version of this plugin.
+     */
+    private $version;
+
+    /**
+     * Initialize the class and set its properties.
+     *
+     * @since    1.0.0
+     * @param      string    $plugin_name       The name of this plugin.
+     * @param      string    $version    The version of this plugin.
+     */
+    public function __construct($plugin_name, $version)
+    {
+
+        $this->plugin_name = $plugin_name;
+        $this->version = $version;
+    }
+
+    /**
+     * Register the stylesheets for the admin area.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_styles()
+    {
+
+        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/nz-social-contacts-admin.css', array(), $this->version, 'all');
+    }
+
+    /**
+     * Register the JavaScript for the admin area.
+     *
+     * @since    1.0.0
+     */
+    public function enqueue_scripts()
+    {
+
+        wp_enqueue_script($this->plugin_name . '-lodash', 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.5.1/lodash.min.js');
+        wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/nz-social-contacts-admin.js', array('jquery'), $this->version, false);
+    }
+
+    public function create_menu()
+    {
+
+        //create new top-level menu
+        add_menu_page('Nz Social Contacts', 'Settings', 'administrator', //
+            __FILE__, //
+            array($this, 'nz_social_contacts_settings_page')//
+        );
+
+        //call register settings function
+        add_action('admin_init', array($this, 'register_settings'));
+    }
+
+    function register_settings()
+    {
+        register_setting('nz-social-contacts', 'fields');
+    }
+
+    function nz_social_contacts_settings_page()
+    {
+        ?>
+        <div class="wrap">
+
+            <pre> 
+&lt;div class="social"&gt;
+    &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
+        &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
+    &lt;/a&gt;
+    &lt;div&gt;
+        &lt;p&gt;
+            contact@amagency.net
+        &lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;   
+            </pre>
+
+            <script type="text/template" class="fieldTpl2">
+                <fieldset class="contact-item">
+                <input value="<%- field.link %>" name="link" type="text" placeholder="http://www.example.com" /> Link to <br>
+                <input value="<%- field.class %>" name="class" type="text" /> Link class <br>
+                <input value="<%- field.icon_class %>" name="icon_class" type="text"  /> Icon class <br>
+                <input value="<%- field.detail %>" name="detail" type="text" /> Detail <br>
+                <button class="button <%- action %>"><%- action %></button>
+                </fieldset>
+            </script>
+            
+            <script type="text/template" class="fieldTpl">
+                <fieldset class="contact-item">
+                <button class="button up">&#8613;</button>
+                
+                <label>Link</label>
+                <input value="<%- field.link %>" name="link" type="text" placeholder="http://www.example.com" />
+                            
+                <label>Class</label>
+                <input value="<%- field.class %>" name="class" type="text" />
+                            
+                <label>Icon</label>
+                <input value="<%- field.icon_class %>" name="icon_class" type="text"  />
+                            
+                <label>Detail</label>
+                <input value="<%- field.detail %>" name="detail" type="text" />
+                            
+                <button class="button <%- action %>"><%- action %></button>
+        
+        <hr>
+                </fieldset>
+            </script>
+            <h2>Nz Social Contacts</h2>
+            <form action="#" id="contacts-fields-items">
+                <button class="button-primary add">Add</button>
+                <div class="contacts-list"></div>
+            </form>
+
+            <form id="social-contacts-save-form" method="post" action="options.php">
+                <?php settings_fields('nz-social-contacts'); ?>
+                <?php do_settings_sections('nz-social-contacts'); ?>
+                <table class="form-table">
+                    <tr valign="top">
+                        <td><input id="contacts-fields-input" type="hidden" name="fields" value="<?php echo esc_attr(get_option('fields')); ?>" /></td>
+                    </tr>
+
+                </table>
+                <?php submit_button(); ?>
+            </form>
+        </div>
+        <?php
+    }
+}
