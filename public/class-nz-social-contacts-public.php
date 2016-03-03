@@ -61,8 +61,10 @@ class Nz_Social_Contacts_Public
      */
     public function enqueue_styles()
     {
+        if (get_option('include_css')) {
 
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/nz-social-contacts-public.css', array(), $this->version, 'all');
+            wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/nz-social-contacts-public.css', array(), $this->version, 'all');
+        }
     }
 
     /**
@@ -83,6 +85,27 @@ class Nz_Social_Contacts_Public
 
     public function shortode_func()
     {
+        $wrap = '<ul id="nz-socials">%s</ul>';
+        $wrapper = '<li><a href="%s" class="%s">%s</a></li>';
+        $icon = '<i class="%s"></i>';
+        $detail = '<div>%s</div>';
+
+        $options = json_decode(get_option('fields'), true);
+
+        $content = '';
+        if (!empty($options)) {
+            foreach ($options as $social) {
+                $i = sprintf($icon, $social['icon_class']);
+                if (!empty($social['detail'])) {
+                    $i.= sprintf($detail, $social['detail']);
+                }
+                $content .= sprintf($wrapper, $social['link'], $social['class'], $i);
+            }
+            $content = sprintf($wrap, $content);
+        }
+        return $content;
+        //old layout
+
         $options = json_decode(get_option('fields'), true);
 
         if (!empty($options)) {
@@ -107,6 +130,5 @@ class Nz_Social_Contacts_Public
             </div>
             <?php
         }
-       
     }
 }

@@ -62,7 +62,7 @@ class Nz_Social_Contacts_Admin
     public function enqueue_styles()
     {
 
-        wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/nz-social-contacts-admin.css', array(), $this->version, 'all');
+        /* wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/nz-social-contacts-admin.css', array(), $this->version, 'all'); */
     }
 
     /**
@@ -80,87 +80,99 @@ class Nz_Social_Contacts_Admin
     public function create_menu()
     {
 
+        add_submenu_page('options-general.php', 'Nz Social Contacts', 'Nz Social Contacts', 'administrator', __FILE__, //
+            array($this, 'nz_social_contacts_settings_page'));
+        /*
         //create new top-level menu
-        add_menu_page('Nz Social Contacts', 'Settings', 'administrator', //
-            __FILE__, //
-            array($this, 'nz_social_contacts_settings_page')//
-        );
-
-        //call register settings function
-        add_action('admin_init', array($this, 'register_settings'));
+          add_menu_page('Nz Social Contacts', 'Nz Social Contacts', 'administrator', //
+          __FILE__, //
+          array($this, 'nz_social_contacts_settings_page')//
+          );
+         */
     }
 
-    function register_settings()
+    function settings_api_init()
     {
         register_setting('nz-social-contacts', 'fields');
+        register_setting('nz-social-contacts', 'include_css');
     }
 
     function nz_social_contacts_settings_page()
     {
         ?>
         <div class="wrap">
-
-            <pre> 
-&lt;div class="social"&gt;
-    &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
-        &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
-    &lt;/a&gt;
-    &lt;div&gt;
-        &lt;p&gt;
-            contact@amagency.net
-        &lt;/p&gt;
-    &lt;/div&gt;
-&lt;/div&gt;   
-            </pre>
-
-            <script type="text/template" class="fieldTpl2">
-                <fieldset class="contact-item">
-                <input value="<%- field.link %>" name="link" type="text" placeholder="http://www.example.com" /> Link to <br>
-                <input value="<%- field.class %>" name="class" type="text" /> Link class <br>
-                <input value="<%- field.icon_class %>" name="icon_class" type="text"  /> Icon class <br>
-                <input value="<%- field.detail %>" name="detail" type="text" /> Detail <br>
-                <button class="button <%- action %>"><%- action %></button>
-                </fieldset>
-            </script>
-            
-            <script type="text/template" class="fieldTpl">
-                <fieldset class="contact-item">
-                <button class="button up">&#8613;</button>
-                
-                <label>Link</label>
-                <input value="<%- field.link %>" name="link" type="text" placeholder="http://www.example.com" />
-                            
-                <label>Class</label>
-                <input value="<%- field.class %>" name="class" type="text" />
-                            
-                <label>Icon</label>
-                <input value="<%- field.icon_class %>" name="icon_class" type="text"  />
-                            
-                <label>Detail</label>
-                <input value="<%- field.detail %>" name="detail" type="text" />
-                            
-                <button class="button <%- action %>"><%- action %></button>
-        
-        <hr>
-                </fieldset>
-            </script>
             <h2>Nz Social Contacts</h2>
-            <form action="#" id="contacts-fields-items">
-                <button class="button-primary add">Add</button>
-                <div class="contacts-list"></div>
-            </form>
-
             <form id="social-contacts-save-form" method="post" action="options.php">
                 <?php settings_fields('nz-social-contacts'); ?>
                 <?php do_settings_sections('nz-social-contacts'); ?>
                 <table class="form-table">
                     <tr valign="top">
-                        <td><input id="contacts-fields-input" type="hidden" name="fields" value="<?php echo esc_attr(get_option('fields')); ?>" /></td>
+                        <td>
+                            <input name="include_css" value="1" type="checkbox"  class="code" <?php echo get_option('include_css') ? 'checked' : ''; ?> /> Include style
+                        </td>
                     </tr>
 
+                    <input id="contacts-fields-input" type="hidden" name="fields" value="<?php echo esc_attr(get_option('fields')); ?>" />
                 </table>
                 <?php submit_button(); ?>
             </form>
+
+            <!--    js form to hanlde fields        -->
+            <form action="#" id="contacts-fields-items">
+                <button class="button-primary add">Add</button>
+                <div class="contacts-list"></div>
+            </form>
+
+            <pre> 
+            &lt;!-- current layout --&gt;
+            &lt;ul class="nz-socials"&gt;
+                &lt;li&gt;
+                    &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
+                        &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
+                        &lt;div&gt;
+                                contact@amagency.net
+                        &lt;/div&gt;
+                    &lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;   
+            </pre>
+            <pre> 
+            &lt;!-- old layout --&gt;
+            &lt;div class="social"&gt;
+                &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
+                    &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
+                &lt;/a&gt;
+                &lt;div&gt;
+                    &lt;p&gt;
+                        contact@amagency.net
+                    &lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;   
+            </pre>
+
+
+            <script type="text/template" class="fieldTpl">
+                <fieldset class="contact-item">
+                <button class="button up">&#8613;</button>
+
+                <label>Link</label>
+                <input value="<%- field.link %>" name="link" type="text" placeholder="http://www.example.com" />
+
+                <label>Class</label>
+                <input value="<%- field.class %>" name="class" type="text" />
+
+                <label>Icon</label>
+                <input value="<%- field.icon_class %>" name="icon_class" type="text"  />
+
+                <label>Detail</label>
+                <input value="<%- field.detail %>" name="detail" type="text" />
+
+                <button class="button <%- action %>"><%- action %></button>
+
+                <hr>
+                </fieldset>
+            </script>
+
         </div>
         <?php
     }
