@@ -88,7 +88,7 @@ class Nz_Social_Contacts_Public
         $wrap = '<ul id="nz-socials">%s</ul>';
         $wrapper = '<li><a target="_blank" href="%s" class="%s">%s</a></li>';
         $icon = '<i class="%s"></i>';
-        $detail = '<div>%s</div>';
+        $detail = '<div><p>%s</p></div>';
 
         $options = json_decode(get_option('fields'), true);
 
