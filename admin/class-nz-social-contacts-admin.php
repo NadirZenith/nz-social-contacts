@@ -115,38 +115,8 @@ class Nz_Social_Contacts_Admin
                 <button class="button-primary add">Add</button>
                 <div class="contacts-list"></div>
             </form>
-
-            <pre> 
-                    &lt;!-- current layout --&gt;
-                    &lt;ul class="nz-socials"&gt;
-                        &lt;li&gt;
-                            &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
-                                &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
-                                &lt;div&gt;
-                                    &lt;p&gt;
-                                        contact@amagency.net
-                                    &lt;/p&gt;
-                                &lt;/div&gt;
-                            &lt;/a&gt;
-                        &lt;/li&gt;
-                    &lt;/ul&gt;   
-            </pre>
-            <pre> 
-                    &lt;!-- old layout --&gt;
-                    &lt;div class="social"&gt;
-                        &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
-                            &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
-                        &lt;/a&gt;
-                        &lt;div&gt;
-                            &lt;p&gt;
-                                contact@amagency.net
-                            &lt;/p&gt;
-                        &lt;/div&gt;
-                    &lt;/div&gt;   
-            </pre>
-
-
-            <script type="text/template" class="fieldTpl">
+            
+               <script type="text/template" class="fieldTpl">
                 <fieldset class="contact-item">
                 <button class="button up">&#8613;</button>
 
@@ -167,6 +137,22 @@ class Nz_Social_Contacts_Admin
                 <hr>
                 </fieldset>
             </script>
+
+            <pre> 
+                    &lt;!-- current layout --&gt;
+                    &lt;ul class="nz-socials"&gt;
+                        &lt;li&gt;
+                            &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
+                                &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
+                                &lt;div&gt;
+                                    &lt;p&gt;
+                                        contact@amagency.net
+                                    &lt;/p&gt;
+                                &lt;/div&gt;
+                            &lt;/a&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;   
+            </pre>
 
         </div>
         <?php
