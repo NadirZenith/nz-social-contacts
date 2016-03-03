@@ -123,7 +123,9 @@ class Nz_Social_Contacts_Admin
                             &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
                                 &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
                                 &lt;div&gt;
+                                    &lt;p&gt;
                                         contact@amagency.net
+                                    &lt;/p&gt;
                                 &lt;/div&gt;
                             &lt;/a&gt;
                         &lt;/li&gt;
