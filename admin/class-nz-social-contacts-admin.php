@@ -82,18 +82,11 @@ class Nz_Social_Contacts_Admin
 
         add_submenu_page('options-general.php', 'Nz Social Contacts', 'Nz Social Contacts', 'administrator', __FILE__, //
             array($this, 'nz_social_contacts_settings_page'));
-        /*
-        //create new top-level menu
-          add_menu_page('Nz Social Contacts', 'Nz Social Contacts', 'administrator', //
-          __FILE__, //
-          array($this, 'nz_social_contacts_settings_page')//
-          );
-         */
     }
 
     function settings_api_init()
     {
-        register_setting('nz-social-contacts', 'fields');
+        register_setting('nz-social-contacts', 'nz_social_contacts_fields');
         register_setting('nz-social-contacts', 'include_css');
     }
 
@@ -112,7 +105,7 @@ class Nz_Social_Contacts_Admin
                         </td>
                     </tr>
 
-                    <input id="contacts-fields-input" type="hidden" name="fields" value="<?php echo esc_attr(get_option('fields')); ?>" />
+                    <input id="contacts-fields-input" type="hidden" name="nz_social_contacts_fields" value="<?php echo esc_attr(get_option('nz_social_contacts_fields')); ?>" />
                 </table>
                 <?php submit_button(); ?>
             </form>
@@ -124,30 +117,30 @@ class Nz_Social_Contacts_Admin
             </form>
 
             <pre> 
-            &lt;!-- current layout --&gt;
-            &lt;ul class="nz-socials"&gt;
-                &lt;li&gt;
-                    &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
-                        &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
-                        &lt;div&gt;
-                                contact@amagency.net
-                        &lt;/div&gt;
-                    &lt;/a&gt;
-                &lt;/li&gt;
-            &lt;/ul&gt;   
+                    &lt;!-- current layout --&gt;
+                    &lt;ul class="nz-socials"&gt;
+                        &lt;li&gt;
+                            &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
+                                &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
+                                &lt;div&gt;
+                                        contact@amagency.net
+                                &lt;/div&gt;
+                            &lt;/a&gt;
+                        &lt;/li&gt;
+                    &lt;/ul&gt;   
             </pre>
             <pre> 
-            &lt;!-- old layout --&gt;
-            &lt;div class="social"&gt;
-                &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
-                    &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
-                &lt;/a&gt;
-                &lt;div&gt;
-                    &lt;p&gt;
-                        contact@amagency.net
-                    &lt;/p&gt;
-                &lt;/div&gt;
-            &lt;/div&gt;   
+                    &lt;!-- old layout --&gt;
+                    &lt;div class="social"&gt;
+                        &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
+                            &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
+                        &lt;/a&gt;
+                        &lt;div&gt;
+                            &lt;p&gt;
+                                contact@amagency.net
+                            &lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;   
             </pre>
 
 

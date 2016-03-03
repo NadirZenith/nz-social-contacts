@@ -86,7 +86,7 @@ class Nz_Social_Contacts_Public
     public function shortode_func()
     {
         $wrap = '<ul id="nz-socials">%s</ul>';
-        $wrapper = '<li><a href="%s" class="%s">%s</a></li>';
+        $wrapper = '<li><a target="_blank" href="%s" class="%s">%s</a></li>';
         $icon = '<i class="%s"></i>';
         $detail = '<div>%s</div>';
 
