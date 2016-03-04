@@ -86,20 +86,20 @@ class Nz_Social_Contacts_Public
     public function shortode_func()
     {
         $wrap = '<ul id="nz-socials">%s</ul>';
-        $wrapper = '<li><a target="_blank" href="%s" class="%s">%s</a></li>';
-        $icon = '<i class="%s"></i>';
+        $wrapper = '<li><a target="_blank" href="%s">%s</a></li>';
+        $icon = '<i class="%s">%s</i>';
         $detail = '<div><p>%s</p></div>';
 
-        $options = json_decode(get_option('fields'), true);
+        $options = json_decode(get_option('nz_social_contacts_fields'), true);
 
         $content = '';
         if (!empty($options)) {
             foreach ($options as $social) {
-                $i = sprintf($icon, $social['icon_class']);
+                $i = sprintf($icon, $social['icon_class'],$social['icon_content']);
                 if (!empty($social['detail'])) {
                     $i.= sprintf($detail, $social['detail']);
                 }
-                $content .= sprintf($wrapper, $social['link'], $social['class'], $i);
+                $content .= sprintf($wrapper, $social['link'], $i);
             }
             $content = sprintf($wrap, $content);
         }

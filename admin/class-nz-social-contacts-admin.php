@@ -123,11 +123,14 @@ class Nz_Social_Contacts_Admin
                 <label>Link</label>
                 <input value="<%- field.link %>" name="link" type="text" placeholder="http://www.example.com" />
 
-                <label>Class</label>
-                <input value="<%- field.class %>" name="class" type="text" />
+                <!--<label>Class</label>-->
+                <!--<input value="<%- field.class %>" name="class" type="text" />-->
 
-                <label>Icon</label>
+                <label>Class</label>
                 <input value="<%- field.icon_class %>" name="icon_class" type="text"  />
+                            
+                <label>Content</label>
+                <input value="<%- field.icon_content %>" name="icon_content" type="text"  />
 
                 <label>Detail</label>
                 <input value="<%- field.detail %>" name="detail" type="text" />
