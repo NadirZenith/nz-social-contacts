@@ -86,49 +86,24 @@ class Nz_Social_Contacts_Public
     public function shortode_func()
     {
         $wrap = '<ul id="nz-socials">%s</ul>';
-        $wrapper = '<li><a target="_blank" href="%s">%s</a></li>';
+        $wrapper = '<li><a href="%s" class="%s" target="_blank">%s</a></li>';
         $icon = '<i class="%s">%s</i>';
         $detail = '<div><p>%s</p></div>';
 
         $options = json_decode(get_option('nz_social_contacts_fields'), true);
-
+d($options);
         $content = '';
         if (!empty($options)) {
             foreach ($options as $social) {
-                $i = sprintf($icon, $social['icon_class'],$social['icon_content']);
+                $i = sprintf($icon, $social['icon_class'], $social['icon_content']);
                 if (!empty($social['detail'])) {
                     $i.= sprintf($detail, $social['detail']);
                 }
-                $content .= sprintf($wrapper, $social['link'], $i);
+                $content .= sprintf($wrapper, $social['link'], $social['class'], $i);
             }
             $content = sprintf($wrap, $content);
         }
         return $content;
-        //old layout
-
-        $options = json_decode(get_option('fields'), true);
-
-        if (!empty($options)) {
-            ?>
-            <div id="nz-socials">
-                <?php
-                foreach ($options as $social) {
-                    ?>
-                    <div class="social">
-                        <a target="_blank" href="<?php echo $social['link'] ?>" class="<?php echo $social['class'] ?>">
-                            <i class="<?php echo $social['icon_class'] ?>"></i>
-                        </a>
-                        <?php if (!empty($social['detail'])) { ?>
-                            <div>
-                                <p><?php echo $social['detail'] ?></p>
-                            </div>
-                        <?php } ?>
-                    </div>
-                    <?php
-                }
-                ?>
-            </div>
-            <?php
-        }
+        
     }
 }

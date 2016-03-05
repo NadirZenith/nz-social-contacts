@@ -63,7 +63,7 @@
             this.$saveForm.on('submit', function (e) {
                 var arr = self.$form.serializeArray();
 
-                var form = [], i, j, temparray, chunk = 4;
+                var form = [], i, j, temparray, chunk = 5;
                 for (i = 0, j = arr.length; i < j; i += chunk) {
                     temparray = arr.slice(i, i + chunk);
                     var o = {};
@@ -91,9 +91,10 @@
 
                 var fieldData = {
                     link: 'link',
-                    class: 'class',
-                    icon_class: 'icon_class',
-                    detail: 'detail'
+                    class: 'linkclass',
+                    icon_class: 'iconclass',
+                    icon_content: 'iconcontent',
+                    detail: ''
                 };
             }
             var fieldTplData = {

@@ -62,7 +62,7 @@ class Nz_Social_Contacts_Admin
     public function enqueue_styles()
     {
 
-        /* wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/nz-social-contacts-admin.css', array(), $this->version, 'all'); */
+         wp_enqueue_style($this->plugin_name, plugin_dir_url(__FILE__) . 'css/nz-social-contacts-admin.css', array(), $this->version, 'all'); 
     }
 
     /**
@@ -118,26 +118,36 @@ class Nz_Social_Contacts_Admin
             
                <script type="text/template" class="fieldTpl">
                 <fieldset class="contact-item">
-                <button class="button up">&#8613;</button>
+                    <button class="button up">&#8613;</button>
 
-                <label>Link</label>
-                <input value="<%- field.link %>" name="link" type="text" placeholder="http://www.example.com" />
+                    <div>
+                        <label>Link</label>
+                        <input value="<%- field.link %>" name="link" type="text" placeholder="http://www.example.com" />
+                    </div>
 
-                <!--<label>Class</label>-->
-                <!--<input value="<%- field.class %>" name="class" type="text" />-->
+                    <div>
+                        <label>Class</label>
+                        <input value="<%- field.class %>" name="class" type="text" />
+                    </div>
 
-                <label>Class</label>
-                <input value="<%- field.icon_class %>" name="icon_class" type="text"  />
-                            
-                <label>Content</label>
-                <input value="<%- field.icon_content %>" name="icon_content" type="text"  />
+                    <div>
+                        <label>Icon Class</label>
+                        <input value="<%- field.icon_class %>" name="icon_class" type="text"  />
+                    </div>
 
-                <label>Detail</label>
-                <input value="<%- field.detail %>" name="detail" type="text" />
+                    <div>
+                        <label>Content</label>
+                        <input value="<%- field.icon_content %>" name="icon_content" type="text"  />
+                    </div>
 
-                <button class="button <%- action %>"><%- action %></button>
+                    <div>
+                        <label>Detail</label>
+                        <input value="<%- field.detail %>" name="detail" type="text" />
+                    </div>
 
-                <hr>
+                    <button class="button <%- action %>"><%- action %></button>
+
+                    <hr>
                 </fieldset>
             </script>
 
@@ -145,11 +155,11 @@ class Nz_Social_Contacts_Admin
                     &lt;!-- current layout --&gt;
                     &lt;ul class="nz-socials"&gt;
                         &lt;li&gt;
-                            &lt;a href="mailto:contact@amagency.net" class="bg-color-brand"&gt;
-                                &lt;i class="fa fa-envelope"&gt;&lt;/i&gt;
+                            &lt;a href="#link||mailto:contact@amagency.net" class="linkclass bg-color-brand"&gt;
+                                &lt;i class="iconclass fa fa-envelope"&gt;iconcontent&lt;/i&gt;
                                 &lt;div&gt;
                                     &lt;p&gt;
-                                        contact@amagency.net
+                                        contact@amagency.net (detail)
                                     &lt;/p&gt;
                                 &lt;/div&gt;
                             &lt;/a&gt;
