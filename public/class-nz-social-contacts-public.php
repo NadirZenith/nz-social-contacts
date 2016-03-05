@@ -91,7 +91,7 @@ class Nz_Social_Contacts_Public
         $detail = '<div><p>%s</p></div>';
 
         $options = json_decode(get_option('nz_social_contacts_fields'), true);
-d($options);
+
         $content = '';
         if (!empty($options)) {
             foreach ($options as $social) {
